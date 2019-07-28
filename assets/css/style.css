@@ -1,0 +1,616 @@
+@charset "UTF-8";
+
+@font-face {
+    font-family: IranYekan;
+    font-style: normal;
+    font-weight: bold;
+    src: url('../fonts/eot/iranyekanwebbold(fanum).eot');
+    src: url('../fonts/eot/iranyekanwebbold(fanum).eot?#iefix') format('embedded-opentype'),  /* IE6-8 */
+        url('../fonts/woff2/iranyekanwebbold(fanum).woff2') format('woff2'),  /* FF39+,Chrome36+, Opera24+*/
+        url('../fonts/woff/iranyekanwebbold(fanum).woff') format('woff'),  /* FF3.6+, IE9, Chrome6+, Saf5.1+*/
+        url('../fonts/ttf/iranyekanwebbold(fanum).ttf') format('truetype');
+}
+
+@font-face {
+    font-family: IranYekan;
+    font-style: normal;
+    font-weight: 300;
+    src: url('../fonts/eot/iranyekanweblight(fanum).eot');
+    src: url('../fonts/eot/iranyekanweblight(fanum).eot?#iefix') format('embedded-opentype'),  /* IE6-8 */
+        url('../fonts/woff2/iranyekanweblight(fanum).woff2') format('woff2'),  /* FF39+,Chrome36+, Opera24+*/
+        url('../fonts/woff/iranyekanweblight(fanum).woff') format('woff'),  /* FF3.6+, IE9, Chrome6+, Saf5.1+*/
+        url('../fonts/ttf/iranyekanweblight(fanum).ttf') format('truetype');
+}
+
+@font-face {
+    font-family: IranYekan;
+    font-style: normal;
+    font-weight: normal;
+    src: url('../fonts/eot/iranyekanwebregular(fanum).eot');
+    src: url('../fonts/eot/iranyekanwebregular(fanum).eot?#iefix') format('embedded-opentype'),  /* IE6-8 */
+        url('../fonts/woff2/iranyekanwebregular(fanum).woff2') format('woff2'),  /* FF39+,Chrome36+, Opera24+*/
+        url('../fonts/woff/iranyekanwebregular(fanum).woff') format('woff'),  /* FF3.6+, IE9, Chrome6+, Saf5.1+*/
+        url('../fonts/ttf/iranyekanwebregular(fanum).ttf') format('truetype');
+}
+
+@font-face {
+	font-family: IranSans;
+	font-style: normal;
+	font-weight: normal;
+	src: url('fonts/eot/IRANSansWeb.eot');
+	src: url('fonts/eot/IRANSansWeb.eot?#iefix') format('embedded-opentype'),  /* IE6-8 */
+		 url('fonts/woff2/IRANSansWeb.woff2') format('woff2'),  /* FF39+,Chrome36+, Opera24+*/
+		 url('fonts/woff/IRANSansWeb.woff') format('woff'),  /* FF3.6+, IE9, Chrome6+, Saf5.1+*/
+		 url('fonts/ttf/IRANSansWeb.ttf') format('truetype');
+}
+
+@font-face {
+    font-family: Vazir;
+    src: url('../fonts/vazir/Vazir-Black.eot');
+    src: url('../fonts/vazir/Vazir-Black.eot?#iefix') format('embedded-opentype'),
+         url('../fonts/vazir/Vazir-Black.woff2') format('woff2'),
+         url('../fonts/vazir/Vazir-Black.woff') format('woff'),
+         url('../fonts/vazir/Vazir-Black.ttf') format('truetype');
+    font-weight: 900;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: Vazir;
+    src: url('../fonts/vazir/Vazir-Medium.eot');
+    src: url('../fonts/vazir/Vazir-Medium.eot?#iefix') format('embedded-opentype'),
+         url('../fonts/vazir/Vazir-Medium.woff2') format('woff2'),
+         url('../fonts/vazir/Vazir-Medium.woff') format('woff'),
+         url('../fonts/vazir/Vazir-Medium.ttf') format('truetype');
+    font-weight: 500;
+    font-style: normal;
+}
+
+*, body {
+    font-family: IranYekan, Vazir, IranSans, sans-serif;
+    font-weight: 400;
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+    -moz-osx-font-smoothing: grayscale;
+    direction: rtl;
+}
+
+h1, h2, h3 {
+    letter-spacing: -.03125em;
+    word-spacing: -.0416666667em;
+    font-family: IranYekan, sans-serif;
+}
+
+html, body {
+    height: 100%;
+}
+
+.active-it {
+    display: block !important;
+}
+
+.hide-it {
+    display: none !important;
+}
+
+.fadeIn-it {
+    opacity: .3;
+    transition: all .3s ease 0s;
+}
+
+.fadeOut-it {
+    opacity: 1;
+    transition: all .2s ease 0s;
+}
+
+#progress-bar {
+    z-index: 99999999999;
+    position: fixed;
+    top: 0;
+    padding: 0;
+    margin: 0;
+}
+
+.notification-success {
+    background:#68a24e;
+    color: #FFF;
+    padding: 11px 30px;
+}
+
+.notification-failed {
+    background: #df6452;
+    color: #FFF;
+    padding: 11px 30px;
+}
+
+.wrapper {
+    background-color: #FFF;
+    height: 100%;
+}
+
+.wrapper > .row {
+    position: relative;
+    margin-left: 0;
+    margin-right: 0;
+    height: 100%;
+}
+
+.branding {
+    display: inline-block;
+    position: absolute;
+    z-index: 1000;
+    top: 50px;
+    right: 50px;
+    left: initial;
+    bottom: initial;
+}
+
+.branding img {
+    width: 100px;
+}
+
+.branding a {
+    display: inline-block;
+    text-decoration: none;
+}
+
+.branding .logo {
+    display: inline-block;
+    background-image: url('../images/logo.png');
+    background-size: contain;
+    background-repeat: no-repeat;
+}
+
+.branding .logo img {
+    width: 50px;
+}
+
+.branding .logo img.logo-size {
+    opacity: 0 !important;
+}
+
+.branding h1 {
+    font-size: 20px;
+    display: inline-block;
+    font-weight: 100;
+    color: #5f606b;
+}
+
+.sidebar {
+    display: inline-block;
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 550px;
+    min-height: 600px;
+    height: 100%;
+    overflow: hidden;
+    padding: 60px;
+    text-align: center;
+    z-index: 999;
+    background-color: #FAFAFA;
+}
+
+.sidebar .sidebar-container {
+    position: relative;
+    top: 50%;
+    -webkit-transform: translateY(-50%);
+    -moz-transform: translateY(-50%);
+    -ms-transform: translateY(-50%);
+    transform: translateY(-50%);
+}
+
+.sidebar .sidebar-container img {
+    width: 100%;
+    max-width: 430px;
+    margin-top: -5%;
+}
+
+.main-content {
+    margin-right: 550px;
+    width: 100%;
+}
+
+.main-content .form-container ::-webkit-input-placeholder {
+    color: #000000;
+}
+
+.main-content .form-container :-moz-placeholder {
+    color: #000000;
+}
+
+.main-content .form-container ::-moz-placeholder {
+    color: #000000;
+}
+
+.main-content .form-container :-ms-input-placeholder {
+    color: #000000;
+}
+
+.form-control ::-webkit-input-placeholder {
+    color: #000000;
+}
+
+.form-control :-moz-placeholder {
+    color: #000000;
+}
+
+.form-control ::-moz-placeholder {
+    color: #000000;
+}
+
+.form-control :-ms-input-placeholder {
+    color: #000000;
+}
+
+.form-control:focus {
+    -webkit-box-shadow: none;
+    box-shadow: none;
+}
+
+.form-control ::-webkit-input-placeholder {
+    color: #526489;
+}
+
+.form-control :-moz-placeholder {
+    color: #526489;
+}
+
+.form-control ::-moz-placeholder {
+    color: #526489;
+}
+
+.form-control :-ms-input-placeholder {
+    color: #526489;
+}
+
+.form-container {
+    position: relative;
+    text-align: center;
+    display: -webkit-box;
+    display: -moz-box;
+    display: -ms-flexbox;
+    display: -webkit-flex;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 60px;
+    min-height: 100%;
+    position: relative;
+    background-color: #fff;
+}
+
+.form-container .form-group {
+    color: #000;
+    font-size: 15px;
+    font-weight: 300;
+}
+
+.form-container .form-inner {
+    display: inline-block;
+    width: 100%;
+    max-width: 260px;
+    text-align: right;
+    -webkit-transition: all 0.4s ease;
+    transition: all 0.4s ease;
+}
+
+.form-container form {
+    margin-bottom: 58px;
+}
+
+.form-container h3 {
+    color: #000;
+    text-align: right;
+    font-size: 24px;
+    font-weight: 900;
+    margin-bottom: 10px;
+}
+
+.form-container h3.form-title {
+    margin-bottom: 30px;
+}
+
+.form-container p {
+    line-height: 29px;
+    color: #474750;
+    text-align: right;
+    font-size: 14px;
+    margin-top: .7em;
+    margin-bottom: 1.2em;
+    font-weight: 400;
+}
+
+.form-container label {
+    font-weight: 300;
+    line-height: 20px;
+    margin-bottom: 10px;
+    text-align: right;
+    font-size: 14px;
+    font-weight: bold;
+    color: #868e98;
+    top: 2px;
+    position: relative;
+}
+
+.form-container .form-button {
+    margin-top: 5px;
+}
+
+.form-container .form-button a {
+    font-size: 13px;
+    font-weight: 700;
+    color: #fff;
+}
+
+.form-container vaadin-text-field {
+    width: 100%;
+    font-size: 14px;
+    font-weight: bold;
+}
+
+.form-container vaadin-text-field [part="value"] {
+    padding-bottom: 10px !important;
+}
+
+.form-container vaadin-button {
+    background: #0093FF;
+    color: #FFF;
+    padding: 0px 0 1px;
+    cursor: pointer;
+    width: 100%;
+    height: 40px;
+    font-family: IranYekan;
+    font-weight: bold;
+    font-size: 16px;
+}
+
+.form-container .radio-button-group {
+    float: left;
+}
+
+.form-container .radio-button-group vaadin-radio-button span {
+    font-size: 14px;
+    color: #3e434a;
+}
+
+/* Form Complete */
+.form-container .form-complete.show-it .tick-holder .tick-icon {
+    -webkit-animation: check-animation3 0.7s cubic-bezier(0.34, 1.61, 0.7, 1) 0s forwards;
+    -moz-animation: check-animation3 0.7s cubic-bezier(0.34, 1.61, 0.7, 1) 0s forwards;
+    -ms-animation: check-animation3 0.7s cubic-bezier(0.34, 1.61, 0.7, 1) 0s forwards;
+    animation: check-animation3 0.7s cubic-bezier(0.34, 1.61, 0.7, 1) 0s forwards;
+}
+
+.form-container .form-complete.show-it .tick-holder .tick-icon:before {
+    -webkit-animation: check-animation1 0.2s linear 0.2s forwards;
+    -moz-animation: check-animation1 0.2s linear 0.2s forwards;
+    -ms-animation: check-animation1 0.2s linear 0.2s forwards;
+    animation: check-animation1 0.2s linear 0.2s forwards;
+}
+
+.form-container .form-complete.show-it .tick-holder .tick-icon:after {
+    -webkit-animation: check-animation2 0.4s ease 0.4s forwards;
+    -moz-animation: check-animation2 0.4s ease 0.4s forwards;
+    -ms-animation: check-animation2 0.4s ease 0.4s forwards;
+    animation: check-animation2 0.4s ease 0.4s forwards;
+}
+
+.form-container .form-complete .tick-holder {
+    text-align: center;
+    margin-bottom: 12px;
+}
+
+.form-container .form-complete .tick-holder .tick-icon {
+    position: relative;
+    display: inline-block;
+    width: 40px;
+    height: 40px;
+    border-radius: 40px;
+    background-color: rgba(233, 253, 214, 0);
+    -webkit-transform: rotate(35deg) scale(2);
+    -moz-transform: rotate(35deg) scale(2);
+    -ms-transform: rotate(35deg) scale(2);
+    transform: rotate(35deg) scale(2);
+    -webkit-transform-origin: center center;
+    -moz-transform-origin: center center;
+    -ms-transform-origin: center center;
+    transform-origin: center center;
+}
+
+.form-container .form-complete .tick-holder .tick-icon:before {
+    content: "";
+    position: absolute;
+    background-color: #8CCB57;
+    width: 10px;
+    height: 2px;
+    top: 28px;
+    left: 14px;
+    border-radius: 2px;
+    -webkit-transform-origin: left center;
+    -moz-transform-origin: left center;
+    -ms-transform-origin: left center;
+    transform-origin: left center;
+    -webkit-transform: scaleX(0);
+    -moz-transform: scaleX(0);
+    -ms-transform: scaleX(0);
+    transform: scaleX(0);
+}
+
+.form-container .form-complete .tick-holder .tick-icon:after {
+    content: "";
+    position: absolute;
+    background-color: #8CCB57;
+    width: 2px;
+    height: 20px;
+    top: 9px;
+    left: 22px;
+    border-radius: 2px;
+    -webkit-transform-origin: center bottom;
+    -moz-transform-origin: center bottom;
+    -ms-transform-origin: center bottom;
+    transform-origin: center bottom;
+    -webkit-transform: scaleY(0);
+    -moz-transform: scaleY(0);
+    -ms-transform: scaleY(0);
+    transform: scaleY(0);
+}
+
+.form-container .form-complete h3 {
+    text-align: center;
+    color: #383940;
+    font-size: 17px;
+}
+
+.form-container .form-complete p {
+    text-align: center;
+    font-size: 15px;
+    opacity: 0.8;
+    margin-bottom: 20px;
+    color: #000;
+}
+
+.form-container .form-complete .sidebar-container {
+    font-size: 12px;
+    font-weight: 700;
+    color: #000;
+    border-top: 1px solid rgba(0, 0, 0, 0.5);
+    padding: 10px;
+    margin-top: 60px;
+}
+
+.form-container .form-complete .sidebar-container span {
+    font-size: 12px;
+    font-weight: 700;
+    color: #000;
+    opacity: 0.6;
+}
+
+.form-container .form-complete .sidebar-container a {
+    font-size: 12px;
+    font-weight: 700;
+    color: #000;
+    opacity: 0.9;
+}
+
+.form-container .hide-it {
+    opacity: 0;
+    z-index: 1;
+    pointer-events: none;
+    -webkit-transform-origin: center center;
+    -moz-transform-origin: center center;
+    -ms-transform-origin: center center;
+    transform-origin: center center;
+    -webkit-transform: scale(0.7) translateX(-200px);
+    -moz-transform: scale(0.7) translateX(-200px);
+    -ms-transform: scale(0.7) translateX(-200px);
+    transform: scale(0.7) translateX(-200px);
+}
+
+@keyframes check-animation1 {
+    0% {
+        -webkit-transform: scaleX(0);
+        -moz-transform: scaleX(0);
+        -ms-transform: scaleX(0);
+        transform: scaleX(0);
+    }
+
+    100% {
+        -webkit-transform: scaleX(1);
+        -moz-transform: scaleX(1);
+        -ms-transform: scaleX(1);
+        transform: scaleX(1);
+    }
+}
+
+@keyframes check-animation2 {
+    0% {
+        -webkit-transform: scaleY(0);
+        -moz-transform: scaleY(0);
+        -ms-transform: scaleY(0);
+        transform: scaleY(0);
+    }
+
+    100% {
+        -webkit-transform: scaleY(1);
+        -moz-transform: scaleY(1);
+        -ms-transform: scaleY(1);
+        transform: scaleY(1);
+    }
+}
+
+@keyframes check-animation3 {
+    0% {
+        background-color: rgba(233, 253, 214, 0);
+        -webkit-transform: rotate(35deg) scale(2);
+        -moz-transform: rotate(35deg) scale(2);
+        -ms-transform: rotate(35deg) scale(2);
+        transform: rotate(35deg) scale(2);
+    }
+
+    100% {
+        background-color: #E9FDD6;
+        -webkit-transform: rotate(45deg) scale(1);
+        -moz-transform: rotate(45deg) scale(1);
+        -ms-transform: rotate(45deg) scale(1);
+        transform: rotate(45deg) scale(1);
+    }
+}
+
+@keyframes c-check-animation3 {
+    0% {
+        background-color: rgba(233, 253, 214, 0);
+        -webkit-transform: rotate(35deg) scale(2);
+        -moz-transform: rotate(35deg) scale(2);
+        -ms-transform: rotate(35deg) scale(2);
+        transform: rotate(35deg) scale(2);
+    }
+
+    100% {
+        background-color: #E9FDD6;
+        -webkit-transform: rotate(45deg) scale(1);
+        -moz-transform: rotate(45deg) scale(1);
+        -ms-transform: rotate(45deg) scale(1);
+        transform: rotate(45deg) scale(1);
+    }
+}
+
+/*
+MEDIA QUERIES
+*/
+@media (min-height: 700px) {
+    .sidebar {
+        position: fixed;
+    }
+
+    .branding {
+        position: fixed;
+    }
+}
+
+@media (max-width: 992px) {
+    .sidebar {
+        display: none;
+    }
+
+    .main-content {
+        margin-right: 0;
+    }
+
+    .main-content .form-container {
+        padding: 150px 50px 60px;
+    }
+
+    .branding {
+        top: 0;
+        right: 0;
+        left: initial;
+        bottom: initial;
+        width: 100%;
+        padding: 27px;
+        text-align: right;
+        background: #f9f9f9;
+    }
+}
+
+

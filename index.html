@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html>
+    <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>موسسه قلم</title>
+    <link rel="stylesheet" type="text/css" href="assets/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="assets/css/style.css">
+    <link rel="import" href="bower_components/vaadin-button/vaadin-button.html">
+    <link rel="import" href="bower_components/vaadin-text-field/vaadin-text-field.html">
+    <link rel="import" href="bower_components/vaadin-notification/vaadin-notification.html">
+    <link rel="import" href="bower_components/vaadin-progress-bar/vaadin-progress-bar.html">
+    <link rel="import" href="bower_components/vaadin-radio-button/vaadin-radio-button.html">
+</head>
+<body>
+<vaadin-progress-bar id="progress-bar" indeterminate style="display: none;"></vaadin-progress-bar>
+<div class="wrapper">
+    <div class="branding">
+        <a href="/">
+            <div class="logo">
+                <img class="logo-size" src="assets/images/logo.png" alt="Logo">
+            </div>
+            <h1>کانون قلم</h1>
+        </a>
+    </div>
+    <div class="row">
+        <section class="sidebar">
+            <div class="sidebar-container">
+                <img src="assets/images/signup-image.png" alt="Signup Image">
+            </div>
+        </section>
+        <section class="main-content">
+            <div class="form-container">
+                <div class="form-inner">
+                    <form name="action-form" id="action-form" action="">
+                        <div class="form-steps">
+                            <div class="form-step step__1">
+                                <h3>وارد شوید</h3>
+                                <p>جهت ورود شماره همراه خود را وارد کنید.</p>
+                                <vaadin-text-field type="tel" id="user_phone" placeholder="شماره همراه"></vaadin-text-field>
+                                <div class="form-button">
+                                    <vaadin-button class="submit">ورود</vaadin-button>
+                                </div>
+                            </div>
+                            <div class="form-step step__2" style="display: none;">
+                                <h3>تایید عضویت</h3>
+                                <p>کد ارسال شده را وارد کنید.</p>
+                                <vaadin-text-field type="text" id="verify_code" placeholder="کد فعال سازی"></vaadin-text-field>
+                                <div class="form-button">
+                                    <vaadin-button class="submit">فعال سازی</vaadin-button>
+                                </div>
+                            </div>
+                            <div class="form-step step__3" style="display: none;">
+                                <h3>تکمیل اطلاعات</h3>
+                                <p>مشخصات خود را تکمیل نمایید.</p>
+                                <div id="gender">
+                                    <label class="label">جنسیت</label>
+                                    <div class="radio-button-group">
+                                        <vaadin-radio-button class="gender" value="male" aria-checked="true" checked><span>آقا</span></vaadin-radio-button>
+                                        <vaadin-radio-button class="gender" value="female"><span>خانم</span></vaadin-radio-button>
+                                    </div>
+                                </div>
+                                <vaadin-text-field type="text" id="fullname" placeholder="نام و نام خانوادگی"></vaadin-text-field>
+                                <vaadin-text-field type="text" id="major" placeholder="رشته تحصیلی"></vaadin-text-field>
+                                <div class="form-button">
+                                    <vaadin-button class="submit">ثبت نام</vaadin-button>
+                                </div>
+                            </div>
+                            <div class="form-step step__4" style="display: none;">
+                                <div class="form-complete show-it">
+                                <div class="tick-holder">
+                                    <div class="tick-icon"></div>
+                                </div>
+                                <h3>ثبت نام با موفقیت انجام شد!</h3>
+                                </div>
+                            </div>
+                        </div>
+                        <input type="hidden" name="form_step_id" id="form_step_id" value="0">
+                        <div id="res"></div>
+                    </form>
+                </div>
+            </div>
+        </section>
+    </div>
+</div>
+<vaadin-notification duration="4000"></vaadin-notification>
+
+<script>
+    const actionForm = document.querySelector('#action-form');
+    const progressBar = document.querySelector('#progress-bar');
+
+    // Gender Field
+    var gender = "male";
+    actionForm.querySelectorAll(".gender").forEach(function(e) {
+        e.addEventListener('click', function() {
+            actionForm.querySelectorAll(".gender").forEach(function(event) {
+                if(event.checked == true) {
+                    event.removeAttribute("checked");
+                }
+            });
+            e.setAttribute("checked", "checked");
+            gender = e.value;
+        });
+    });
+
+    function Actionform() {
+        const form_step_id = document.querySelector('#form_step_id');
+        const user_phone = document.querySelector('#user_phone');
+        const verify_code = document.querySelector('#verify_code');
+        const fullname = document.querySelector('#fullname');
+        const major = document.querySelector('#major');
+        const notification = document.querySelector('vaadin-notification');
+        
+        // Enable Transition
+        progressBar.classList.add('active-it');
+        actionForm.classList.add('fadeIn-it');
+
+        // AJAX REUQEST
+        var xhttp = new XMLHttpRequest();
+        xhttp.onreadystatechange = function() {
+            if (this.readyState == 4 && this.status == 200) {
+                // Disable Transition
+                progressBar.classList.remove('active-it');
+                actionForm.classList.remove('fadeIn-it');
+                // Handle Server Callback
+                switch(this.responseText) {
+                    case 'sms-success' :
+                        response = ['پیامک فعال سازی با موفقیت ارسال شد.', 'success'];
+                        notification.open();
+                        form_step_id.value = 1;
+                        actionForm.getElementsByClassName('step__1')[0].classList.add('hide-it');
+                        actionForm.getElementsByClassName('step__2')[0].classList.add('active-it');
+                        break;
+                    case 'sms-failed' :
+                        response = ['خطا در ارسال پیامک! مجدد بررسی کنید.', 'failed'];
+                        notification.open();
+                        break;
+                    case 'signup' :
+                        response = ['فعال سازی انجام شد.', 'success'];
+                        notification.open();
+                        form_step_id.value = 2;
+                        actionForm.getElementsByClassName('step__2')[0].classList.add('hide-it');
+                        actionForm.getElementsByClassName('step__3')[0].classList.add('active-it');
+                        break;
+                    case 'signin' :
+                        response = ['شما قبلا در سیستم ثبت نام کرده اید!', 'failed'];
+                        notification.open();
+                        break;
+                    case 'invalid' :
+                        response = ['کد فعال سازی صحیح نیست.', 'failed'];
+                        notification.open();
+                        break;
+                    case 'registered' :
+                        actionForm.getElementsByClassName('step__3')[0].classList.add('hide-it');
+                        actionForm.getElementsByClassName('step__4')[0].classList.add('active-it');
+                        break;
+                    default :
+                        response = ['درخواست نا معتبر!', 'failed'];
+                        break;
+                }
+
+                //document.getElementById("res").innerHTML = this.responseText;
+                // Notification
+                notification.renderer = function(root) {
+                    if (root.firstElementChild) {
+                        return;
+                    }
+                    var container = window.document.createElement('div');
+                    container.className = ('notification-'+response[1]);
+                    const plainText = window.document.createTextNode(response[0]);
+                    container.appendChild(plainText);
+                    root.appendChild(container);
+                };
+            }
+        };
+        xhttp.open('POST', 'api/verify.php?_=' + new Date().getTime(), true);
+        xhttp.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
+        data = JSON.stringify({
+            status: form_step_id.value ? form_step_id.value : null,
+            phone_entry: user_phone.value ? user_phone.value : null,
+            verify_code: verify_code.value ? verify_code.value : null,
+            gender: gender ? gender : null,
+            fullname: fullname.value ? fullname.value : null,
+            major: major.value ? major.value : null
+        });
+        console.log(data);
+        xhttp.send(data);
+    }
+
+    actionForm.querySelectorAll('.submit').forEach(function(e) {
+        e.addEventListener('click', function() {
+            Actionform();
+        });
+    });
+
+    document.querySelectorAll("#user_phone, #verify_code").forEach(function(event) {
+        event.addEventListener('keyup', function(e) {
+            if(e.keyCode === 13) 
+                Actionform();
+        });
+    });
+</script>
+</body>
+</html>
